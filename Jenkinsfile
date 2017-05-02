@@ -12,7 +12,8 @@ pipeline {
           "checkout": {
             sh '''set -e
 git clone git.pluut.nl:hageric/package -b develop
-mv package/{*,.*} . 2> /dev/null'''
+mv package/{*,.*} . 2> /dev/null
+exit 0'''
             
           },
           "download composer": {
