@@ -58,7 +58,7 @@ exit 0'''
       steps {
         script {
           def scannerHome = tool 'SonarScanner';
-          withSonarQubeEnv('My SonarQube Server') {
+          withSonarQubeEnv('code.pluut.nl') {
             sh "${scannerHome}/bin/sonar-scanner"
           }
         }
