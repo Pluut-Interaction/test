@@ -49,7 +49,9 @@ php -r "unlink('composer-setup.php');"'''
     }
     stage('Fix Code Style') {
       steps {
-        sh 'vendor/bin/php-cs-fixer fix'
+        sh '''#!/bin/bash -x
+vendor/bin/php-cs-fixer fix
+exit 0'''
       }
     }
   }
