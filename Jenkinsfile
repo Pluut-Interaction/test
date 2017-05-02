@@ -11,7 +11,7 @@ pipeline {
         parallel(
           "checkout": {
             sh '''git clone git.pluut.nl:hageric/package -b develop
-mv package/{*,.*} .'''
+mv package/{*,.*} . 2> /dev/null'''
             
           },
           "download composer": {
