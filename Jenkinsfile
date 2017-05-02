@@ -5,7 +5,7 @@ pipeline {
       steps {
         parallel(
           "checkout": {
-            git(changelog: true, url: 'git.pluut.nl:hageric/package', branch: 'HAGERIC', poll: true)
+            sh 'git clone git.pluut.nl:hageric/package -b develop'
             
           },
           "getcomposer": {
