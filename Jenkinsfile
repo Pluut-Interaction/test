@@ -10,7 +10,8 @@ pipeline {
       steps {
         parallel(
           "checkout": {
-            sh '''git clone git.pluut.nl:hageric/package -b develop
+            sh '''set -e
+git clone git.pluut.nl:hageric/package -b develop
 mv package/{*,.*} . 2> /dev/null'''
             
           },
