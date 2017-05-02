@@ -5,9 +5,7 @@ pipeline {
       steps {
         parallel(
           "checkout": {
-            sh '''git clone git.pluut.nl:hageric/package -b develop
-mv -r package/* .
-mv -r package/.* .'''
+            sh 'git clone git.pluut.nl:hageric/package -b develop'
             
           },
           "getcomposer": {
@@ -26,7 +24,10 @@ php -r "unlink('composer-setup.php');"'''
     }
     stage('install') {
       steps {
-        sh 'php composer.phar install'
+        dir(path: 'package') {
+          sh 'php composer.phar install'
+        }
+        
       }
     }
   }
