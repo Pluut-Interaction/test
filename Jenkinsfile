@@ -29,7 +29,8 @@ php -r "unlink('composer-setup.php');"'''
     }
     stage('Install') {
       steps {
-        sh 'php composer.phar install'
+        sh '''php composer.phar install
+'''
       }
     }
     stage('Test') {
@@ -51,5 +52,8 @@ php -r "unlink('composer-setup.php');"'''
         sh 'php php-cs-fixer.phar fix'
       }
     }
+  }
+  environment {
+    LARAVEL_MINOR_VERSION = '4'
   }
 }
