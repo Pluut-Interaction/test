@@ -3,7 +3,16 @@ pipeline {
   stages {
     stage('clean') {
       steps {
-        cleanWs(cleanupMatrixParent: true, deleteDirs: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanWhenNotBuilt: true, cleanWhenFailure: true, cleanWhenAborted: true)
+        parallel(
+          "clean": {
+            cleanWs(cleanupMatrixParent: true, deleteDirs: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanWhenNotBuilt: true, cleanWhenFailure: true, cleanWhenAborted: true)
+            
+          },
+          "": {
+            hipchatSend(v2enabled: true, message: 'Job started', notify: true, token: '4b5b30a61a5eaf705ba506e0c3081f', server: 'api.hipchat.com', sendAs: 'Jenkins', room: '3795496')
+            
+          }
+        )
       }
     }
     stage('install') {
