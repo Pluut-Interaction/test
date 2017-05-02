@@ -49,26 +49,20 @@ php -r "unlink('composer-setup.php');"'''
     }
     stage('Fix Code Style') {
       steps {
-        parallel(
-          "Fix Code Style": {
-            sh '''#!/bin/bash -x
+        sh '''#!/bin/bash -x
 vendor/bin/php-cs-fixer fix
 exit 0'''
-            
-          },
-          "Scan Code": {
-            script {
-              
-              // requires SonarQube Scanner 2.8+
-              def scannerHome = tool 'SonarScanner';
-              withSonarQubeEnv('My SonarQube Server') {
-                sh "${scannerHome}/bin/sonar-scanner"
-              }
-            }
-            
-            
+      }
+    }
+    stage('Code Quality ') {
+      steps {
+        script {
+          def scannerHome = tool 'SonarScanner';
+          withSonarQubeEnv('My SonarQube Server') {
+            sh "${scannerHome}/bin/sonar-scanner"
           }
-        )
+        }
+        
       }
     }
   }
