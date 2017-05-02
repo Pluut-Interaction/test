@@ -5,7 +5,9 @@ pipeline {
       steps {
         parallel(
           "checkout": {
-            sh 'git clone git.pluut.nl:hageric/package -b develop'
+            sh '''git clone git.pluut.nl:hageric/package -b develop
+mv -r package/* .
+mv -r package/.* .'''
             
           },
           "getcomposer": {
